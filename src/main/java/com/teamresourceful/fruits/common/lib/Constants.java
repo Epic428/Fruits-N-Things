@@ -1,4 +1,4 @@
-package com.teamresourceful.fruits.lib;
+package com.teamresourceful.fruits.common.lib;
 
 public class Constants {
     public static final String UTILITY_CLASS = "utility class!";

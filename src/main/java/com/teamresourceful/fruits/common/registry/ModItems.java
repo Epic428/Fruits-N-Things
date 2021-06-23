@@ -1,13 +1,14 @@
-package com.teamresourceful.fruits.registry;
+package com.teamresourceful.fruits.common.registry;
 
 import com.teamresourceful.fruits.Fruits;
-import com.teamresourceful.fruits.lib.Constants;
-import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.item.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import com.teamresourceful.fruits.common.items.BaseFoodItem;
+import com.teamresourceful.fruits.common.items.FoodReturnableItem;
+import com.teamresourceful.fruits.common.lib.Constants;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 
 public class ModItems {
     private ModItems() {
@@ -20,7 +21,8 @@ public class ModItems {
     public static final Item ACAI_BERRY = register("acai_berry", createFoodItem(ModFoods.ACAI_BERRY));
     public static final Item APRICOT = register("apricot", createFoodItem(ModFoods.APRICOT));
     public static final Item AVOCADO = register("avocado", createFoodItem(ModFoods.AVOCADO));
-    public static final Item BANANA = register("banana", createFoodItem(ModFoods.BANANA));
+    public static final Item BANANA_PEEL = register("banana_peel", createReturnableItem());
+    public static final Item BANANA = register("banana", createFoodItem(ModFoods.BANANA, BANANA_PEEL));
     public static final Item BLACKBERRY = register("blackberry", createFoodItem(ModFoods.BLACKBERRY));
     public static final Item CANTALOUPE = register("cantaloupe", createFoodItem(ModFoods.CANTALOUPE));
     public static final Item CHERRY = register("cherry", createFoodItem(ModFoods.CHERRY));
@@ -62,10 +64,18 @@ public class ModItems {
     }
 
     private static Item register(String name, Item item) {
-        return Registry.register(Registry.ITEM, new Identifier(Fruits.MOD_ID, name), item);
+        return Registry.register(Registry.ITEM, new ResourceLocation(Fruits.MOD_ID, name), item);
     }
 
-    private static Item createFoodItem(FoodComponent foodComponent) {
-        return new Item(new FabricItemSettings().group(ItemGroup.FOOD).group(Fruits.ITEM_GROUP).food(foodComponent));
+    private static Item createReturnableItem() {
+        return new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).tab(Fruits.ITEM_GROUP));
+    }
+
+    private static Item createFoodItem(FoodProperties foodComponent, Item returnable) {
+        return new FoodReturnableItem(new Item.Properties().food(foodComponent), returnable);
+    }
+
+    private static Item createFoodItem(FoodProperties foodProperties) {
+        return new BaseFoodItem(new Item.Properties().food(foodProperties), foodProperties.isFastFood() ? 16 : 32);
     }
 }
