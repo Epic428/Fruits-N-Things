@@ -2,6 +2,14 @@
   "itemGroup.fruits.foods": "Fruits N' Things Foods",
   "item.fruits.banana": "Banana",
   "item.fruits.banana_peel": "Banana Peel",
+  "item.fruits.avocado": "Avocado",
+  "item.fruits.peach": "Peach",
+  "item.fruits.cherry": "Cherry",
+  "item.fruits.kiwi": "Kiwi",
+  "item.fruits.pear": "Pear",
+  "item.fruits.orange": "Orange",
+  "item.fruits.lemon": "Lemon",
+  "item.fruits.starfruit": "Starfruit",
   "block.fruits.rain_barrel": "Rain Barrel",
   "block.fruits.oil_press": "Oil Press"
 }
