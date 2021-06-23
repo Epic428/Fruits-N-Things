@@ -26,7 +26,11 @@ public class ModBlocks {
     public static final Block SPRINKLER = register("sprinkler", new SprinklerBlock(METAL_PROPERTY));
     public static final Block OIL_PRESS = register("oil_press", new OilPressBlock(METAL_PROPERTY));
     public static final Block JUICER = register("juicer", new JuicerBlock(METAL_PROPERTY));
-    public static final Block BLENDER = register("blender", new BlenderBlock(WOOD_PROPERTY));
+    public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
+
+    public static void onInitialize() {
+        //class load
+    }
 
     private static Block register(String name, Block block) {
         var resourceLocation = new ResourceLocation(Fruits.MOD_ID, name);
