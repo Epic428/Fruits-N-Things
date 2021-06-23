@@ -1,6 +1,5 @@
 package com.teamresourceful.fruits;
 
-import com.teamresourceful.fruits.common.registry.ModFeatures;
 import com.teamresourceful.fruits.common.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -23,7 +22,7 @@ public class Fruits implements ModInitializer {
 		//orchard villages
 		ModItems.onInitialize();
 		ModItems.onInitialize();
-		ModFeatures.onInitialize();
+		//ModFeatures.onInitialize();
 		System.out.println("Hello Fabric world!");
 	}
 }

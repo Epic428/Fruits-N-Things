@@ -20,6 +20,7 @@ public class ModBlocks {
     private static final FabricBlockSettings METAL_PROPERTY = FabricBlockSettings.of(Material.METAL);
 
     public static final Block COMPOST_BIN = register("compost_bin", new CompostBinBlock(WOOD_PROPERTY));
+    public static final Block FERTILIZED_DIRT = register("fertilized_dirt", new FertilizedDirtBlock(FabricBlockSettings.of(Material.DIRT)));
     public static final Block RAIN_BARREL = register("rain_barrel", new RainBarrelBlock(WOOD_PROPERTY));
     public static final Block FERMENTATION_BARREL = register("fermentation_barrel", new FermentationBarrelBlock(WOOD_PROPERTY));
     public static final Block TRELLIS = register("trellis", new TrellisBlock(WOOD_PROPERTY));
