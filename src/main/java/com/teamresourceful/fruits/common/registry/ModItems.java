@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemNameBlockItem;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -28,8 +29,8 @@ public class ModItems {
     public static final Item BANANA = register("banana", createFoodItem(ModFoods.BANANA, BANANA_PEEL));
     public static final Item BEANS = register("beans", createFoodItem(ModFoods.BEANS));
     public static final Item BELL_PEPPER = register("bell_pepper", createFoodItem(ModFoods.BELL_PEPPER));
-    public static final Item BLACKBERRY = register("blackberry", createFoodItem(ModFoods.BLACKBERRY));
-    public static final Item BLUEBERRY = register("blueberry", createFoodItem(ModFoods.BLUEBERRY));
+    public static final Item BLACKBERRY = register("blackberry", new ItemNameBlockItem(ModBlocks.BLACKBERRY_BUSH, new Item.Properties().food(ModFoods.BLACKBERRY)));
+    public static final Item BLUEBERRY = register("blueberry", new ItemNameBlockItem(ModBlocks.BLUEBERRY_BUSH, new Item.Properties().food(ModFoods.BLUEBERRY)));
     public static final Item BOK_CHOY = register("bok_choy", createFoodItem(ModFoods.BOK_CHOY));
     public static final Item BROCCOLI = register("broccoli", createFoodItem(ModFoods.BROCCOLI));
     public static final Item BRUSSEL_SPROUT = register("brussel_sprout", createFoodItem(ModFoods.BRUSSEL_SPROUT));

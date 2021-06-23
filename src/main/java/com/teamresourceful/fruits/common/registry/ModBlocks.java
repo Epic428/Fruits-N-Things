@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
 public class ModBlocks {
@@ -29,14 +30,22 @@ public class ModBlocks {
     public static final Block JUICER = register("juicer", new JuicerBlock(METAL_PROPERTY));
     public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
 
+    public static final BerryBushBlock BLACKBERRY_BUSH = registerBlockOnly("blackberry_bush", new BerryBushBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLACKBERRY));
+    public static final BerryBushBlock BLUEBERRY_BUSH = registerBlockOnly("blueberry_bush", new BerryBushBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLUEBERRY));
+
+
     public static void onInitialize() {
         //class load
     }
 
-    private static Block register(String name, Block block) {
+    private static <T extends Block> T register(String name, T block) {
         var resourceLocation = new ResourceLocation(Fruits.MOD_ID, name);
         Registry.register(Registry.ITEM, resourceLocation, createBlockItem(block));
         return Registry.register(Registry.BLOCK, resourceLocation, block);
+    }
+
+    private static <T extends Block> T registerBlockOnly(String name, T block) {
+        return Registry.register(Registry.BLOCK, new ResourceLocation(Fruits.MOD_ID, name), block);
     }
 
     private static Item createBlockItem(Block block) {
