@@ -14,7 +14,6 @@ public class Fruits implements ModInitializer {
 	public static final String MOD_ID = "fruits";
 	public static final CreativeModeTab ITEM_GROUP = FabricItemGroupBuilder.build(new ResourceLocation(MOD_ID, "foods"), () -> new ItemStack(Items.APPLE));
 
-
 	@Override
 	public void onInitialize() {
 		//orchard villages

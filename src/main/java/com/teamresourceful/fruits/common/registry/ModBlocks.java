@@ -19,14 +19,16 @@ public class ModBlocks {
 
     private static final FabricBlockSettings WOOD_PROPERTY = FabricBlockSettings.of(Material.WOOD);
     private static final FabricBlockSettings METAL_PROPERTY = FabricBlockSettings.of(Material.METAL);
+    private static final FabricBlockSettings CUTOUT_METAL_PROPERTY = FabricBlockSettings.copyOf(METAL_PROPERTY).nonOpaque();
+    private static final FabricBlockSettings CUTOUT_WOOD_PROPERTY = FabricBlockSettings.copyOf(WOOD_PROPERTY).nonOpaque();
 
     public static final Block COMPOST_BIN = register("compost_bin", new CompostBinBlock(WOOD_PROPERTY));
     public static final Block FERTILIZED_DIRT = register("fertilized_dirt", new FertilizedDirtBlock(FabricBlockSettings.of(Material.DIRT)));
-    public static final Block RAIN_BARREL = register("rain_barrel", new RainBarrelBlock(WOOD_PROPERTY));
+    public static final Block RAIN_BARREL = register("rain_barrel", new RainBarrelBlock(CUTOUT_WOOD_PROPERTY));
     public static final Block FERMENTATION_BARREL = register("fermentation_barrel", new FermentationBarrelBlock(WOOD_PROPERTY));
     public static final Block TRELLIS = register("trellis", new TrellisBlock(WOOD_PROPERTY));
     public static final Block SPRINKLER = register("sprinkler", new SprinklerBlock(METAL_PROPERTY));
-    public static final Block OIL_PRESS = register("oil_press", new OilPressBlock(METAL_PROPERTY));
+    public static final Block OIL_PRESS = register("oil_press", new OilPressBlock(CUTOUT_METAL_PROPERTY));
     public static final Block JUICER = register("juicer", new JuicerBlock(METAL_PROPERTY));
     public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
 

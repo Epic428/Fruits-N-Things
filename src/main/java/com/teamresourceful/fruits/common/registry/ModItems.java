@@ -116,10 +116,10 @@ public class ModItems {
     }
 
     private static Item createFoodItem(FoodProperties foodProperties, Item returnable) {
-        return new FoodReturnableItem(new Item.Properties().food(foodProperties), returnable, foodProperties.isFastFood() ? 16 : 32);
+        return new FoodReturnableItem(new Item.Properties().food(foodProperties).tab(CreativeModeTab.TAB_FOOD), returnable, foodProperties.isFastFood() ? 16 : 32);
     }
 
     private static Item createFoodItem(FoodProperties foodProperties) {
-        return new BaseFoodItem(new Item.Properties().food(foodProperties), foodProperties.isFastFood() ? 16 : 32);
+        return new BaseFoodItem(new Item.Properties().food(foodProperties).tab(CreativeModeTab.TAB_FOOD), foodProperties.isFastFood() ? 16 : 32);
     }
 }
