@@ -114,8 +114,8 @@ public class ModItems {
         return new Item(new Item.Properties().tab(CreativeModeTab.TAB_FOOD).tab(Fruits.ITEM_GROUP));
     }
 
-    private static Item createFoodItem(FoodProperties foodComponent, Item returnable) {
-        return new FoodReturnableItem(new Item.Properties().food(foodComponent), returnable);
+    private static Item createFoodItem(FoodProperties foodProperties, Item returnable) {
+        return new FoodReturnableItem(new Item.Properties().food(foodProperties), returnable, foodProperties.isFastFood() ? 16 : 32);
     }
 
     private static Item createFoodItem(FoodProperties foodProperties) {

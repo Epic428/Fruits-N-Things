@@ -9,17 +9,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
-public class FoodReturnableItem extends Item {
+public class FoodReturnableItem extends BaseFoodItem {
 
     private final Item returnable;
 
-    public FoodReturnableItem(Properties properties, Item returnable) {
-        super(properties.tab(CreativeModeTab.TAB_FOOD).tab(Fruits.ITEM_GROUP));
+    public FoodReturnableItem(Properties properties, Item returnable, int timeToEat) {
+        super(properties.tab(CreativeModeTab.TAB_FOOD).tab(Fruits.ITEM_GROUP),timeToEat);
         this.returnable = returnable;
     }
 
     public static FoodReturnableItem bowlFood(Properties properties){
-        return new FoodReturnableItem(properties, Items.BOWL);
+        return new FoodReturnableItem(properties, Items.BOWL, 32);
     }
 
     @Override
