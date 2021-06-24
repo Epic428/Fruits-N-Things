@@ -32,8 +32,9 @@ public class ModBlocks {
     public static final Block JUICER = register("juicer", new JuicerBlock(METAL_PROPERTY));
     public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
 
-    public static final BerryBushBlock BLACKBERRY_BUSH = registerBlockOnly("blackberry_bush", new BerryBushBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLACKBERRY));
-    public static final BerryBushBlock BLUEBERRY_BUSH = registerBlockOnly("blueberry_bush", new BerryBushBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLUEBERRY));
+    public static final PickablePlantBlock BLACKBERRY_BUSH = registerBlockOnly("blackberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLACKBERRY));
+    public static final PickablePlantBlock BLUEBERRY_BUSH = registerBlockOnly("blueberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLUEBERRY));
+    public static final PickableCactusPlantBlock PRICKLY_PEAR_PLANT = registerBlockOnly("prickly_pear", new PickableCactusPlantBlock(BlockBehaviour.Properties.of(Material.PLANT), () -> ModItems.PRICKLY_PEAR));
 
 
     public static void onInitialize() {

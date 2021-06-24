@@ -12,6 +12,8 @@
   "item.fruits.lime": "Lime",
   "item.fruits.grape": "Grape",
   "item.fruits.starfruit": "Starfruit",
+  "item.fruits.blueberry": "Blueberry",
+  "item.fruits.blackberry": "Blackberry",
   "block.fruits.rain_barrel": "Rain Barrel",
   "block.fruits.oil_press": "Oil Press"
 }
