@@ -83,7 +83,7 @@ public class ModItems {
     public static final Item PINE_NUT = register("pine_nut", createFoodItem(ModFoods.PINE_NUT)); //desert tree
     public static final Item PLUM = register("plum", createFoodItem(ModFoods.PLUM));
     public static final Item POMEGRANATE = register("pomegranate", createFoodItem(ModFoods.POMEGRANATE));
-    public static final Item PRICKLY_PEAR = register("prickly_pear", createFoodItem(ModFoods.PRICKLY_PEAR));
+    public static final Item PRICKLY_PEAR = register("prickly_pear", new ItemNameBlockItem(ModBlocks.PRICKLY_PEAR_PLANT, new Item.Properties().food(ModFoods.PRICKLY_PEAR)));
     public static final Item RADISH = register("radish", createFoodItem(ModFoods.RADISH));
     public static final Item RAISINS = register("raisins", createFoodItem(ModFoods.RAISINS));
     public static final Item RHUBARB = register("rhubarb", createFoodItem(ModFoods.RHUBARB));

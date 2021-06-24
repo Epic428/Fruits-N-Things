@@ -31,17 +31,17 @@ import java.util.function.Supplier;
 import static net.minecraft.world.level.block.SweetBerryBushBlock.AGE;
 import static net.minecraft.world.level.block.SweetBerryBushBlock.MAX_AGE;
 
-public class BerryBushBlock extends BushBlock implements BonemealableBlock {
+public class PickablePlantBlock extends BushBlock implements BonemealableBlock {
 
-    private static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
-    private static final VoxelShape MID_GROWTH_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+    public static final VoxelShape SAPLING_SHAPE = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 8.0D, 13.0D);
+    public static final VoxelShape FULL_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
-    private final Supplier<Item> berry;
+    private final Supplier<Item> plant;
 
-    public BerryBushBlock(Properties properties, Supplier<Item> berry) {
+    public PickablePlantBlock(Properties properties, Supplier<Item> plant) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
-        this.berry = berry;
+        this.plant = plant;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class BerryBushBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter blockGetter, BlockPos pos, CollisionContext context) {
-        return state.getValue(AGE) == 0 ? SAPLING_SHAPE : state.getValue(AGE) < MAX_AGE ? MID_GROWTH_SHAPE : super.getShape(state,blockGetter,pos,context);
+        return state.getValue(AGE) == 0 ? SAPLING_SHAPE : state.getValue(AGE) < MAX_AGE ? FULL_SHAPE : super.getShape(state,blockGetter,pos,context);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class BerryBushBlock extends BushBlock implements BonemealableBlock {
         if (!maxAged && player.getItemInHand(hand).is(Items.BONE_MEAL)) return InteractionResult.PASS;
         if (state.getValue(AGE) < 2) return super.use(state,level,pos,player,hand,hitResult);
 
-        popResource(level, pos, new ItemStack(berry.get(), maxAged ? 2 + level.random.nextInt(2) : 1));
+        popResource(level, pos, new ItemStack(plant.get(), maxAged ? 2 + level.random.nextInt(2) : 1));
         level.setBlock(pos, state.setValue(AGE, 1), 2);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
