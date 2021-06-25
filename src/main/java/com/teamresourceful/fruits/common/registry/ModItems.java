@@ -10,6 +10,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
+import net.minecraft.world.level.block.Block;
 
 @SuppressWarnings("unused")
 public class ModItems {
@@ -29,8 +30,8 @@ public class ModItems {
     public static final Item BANANA = register("banana", createFoodItem(ModFoods.BANANA, BANANA_PEEL));
     public static final Item BEANS = register("beans", createFoodItem(ModFoods.BEANS));
     public static final Item BELL_PEPPER = register("bell_pepper", createFoodItem(ModFoods.BELL_PEPPER));
-    public static final Item BLACKBERRY = register("blackberry", new ItemNameBlockItem(ModBlocks.BLACKBERRY_BUSH, new Item.Properties().food(ModFoods.BLACKBERRY)));
-    public static final Item BLUEBERRY = register("blueberry", new ItemNameBlockItem(ModBlocks.BLUEBERRY_BUSH, new Item.Properties().food(ModFoods.BLUEBERRY)));
+    public static final Item BLACKBERRY = register("blackberry", createPlantableFoodItem(ModBlocks.BLACKBERRY_BUSH, ModFoods.BLACKBERRY));
+    public static final Item BLUEBERRY = register("blueberry", createPlantableFoodItem(ModBlocks.BLUEBERRY_BUSH, ModFoods.BLUEBERRY));
     public static final Item BOK_CHOY = register("bok_choy", createFoodItem(ModFoods.BOK_CHOY));
     public static final Item BROCCOLI = register("broccoli", createFoodItem(ModFoods.BROCCOLI));
     public static final Item BRUSSEL_SPROUT = register("brussel_sprout", createFoodItem(ModFoods.BRUSSEL_SPROUT));
@@ -83,7 +84,7 @@ public class ModItems {
     public static final Item PINE_NUT = register("pine_nut", createFoodItem(ModFoods.PINE_NUT)); //desert tree
     public static final Item PLUM = register("plum", createFoodItem(ModFoods.PLUM));
     public static final Item POMEGRANATE = register("pomegranate", createFoodItem(ModFoods.POMEGRANATE));
-    public static final Item PRICKLY_PEAR = register("prickly_pear", new ItemNameBlockItem(ModBlocks.PRICKLY_PEAR_PLANT, new Item.Properties().food(ModFoods.PRICKLY_PEAR)));
+    public static final Item PRICKLY_PEAR = register("prickly_pear", createPlantableFoodItem(ModBlocks.PRICKLY_PEAR_PLANT, ModFoods.PRICKLY_PEAR));
     public static final Item RADISH = register("radish", createFoodItem(ModFoods.RADISH));
     public static final Item RAISINS = register("raisins", createFoodItem(ModFoods.RAISINS));
     public static final Item RHUBARB = register("rhubarb", createFoodItem(ModFoods.RHUBARB));
@@ -109,6 +110,10 @@ public class ModItems {
 
     private static Item register(String name, Item item) {
         return Registry.register(Registry.ITEM, new ResourceLocation(Fruits.MOD_ID, name), item);
+    }
+
+    private static Item createPlantableFoodItem(Block block, FoodProperties foodProperties) {
+        return new ItemNameBlockItem(block, new Item.Properties().tab(CreativeModeTab.TAB_FOOD).food(foodProperties));
     }
 
     private static Item createReturnableItem() {
