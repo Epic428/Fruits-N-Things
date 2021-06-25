@@ -1,5 +1,6 @@
-package com.teamresourceful.fruits.common.registry;
+package com.teamresourceful.fruits.client;
 
+import com.teamresourceful.fruits.common.registry.ModBlocks;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.renderer.RenderType;
 

@@ -4,6 +4,7 @@ import com.teamresourceful.fruits.common.lib.Constants;
 import net.minecraft.world.food.FoodProperties;
 
 public class ModFoods {
+
     private ModFoods() {
         throw new IllegalStateException(Constants.UTILITY_CLASS);
     }

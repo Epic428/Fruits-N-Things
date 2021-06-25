@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 
 @SuppressWarnings("unused")
 public class ModItems {
+
     private ModItems() {
         throw new IllegalStateException(Constants.UTILITY_CLASS);
     }
