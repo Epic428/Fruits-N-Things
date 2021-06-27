@@ -7,4 +7,6 @@ public class Constants {
     }
 
     //Constants below this line
+
+    public static final String FLUID_AMOUNT = "fluidAmount";
 }
