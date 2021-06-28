@@ -3,6 +3,7 @@ package com.teamresourceful.fruits.common.blocks;
 import com.teamresourceful.fruits.common.blockentities.RainBarrelBlockEntity;
 import com.teamresourceful.fruits.common.registry.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,6 +16,7 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -103,11 +105,16 @@ public class RainBarrelBlock extends Block implements EntityBlock {
     }
 
     @Override
-    public void onRemove(BlockState blockState, Level level, BlockPos blockPos, BlockState blockState2, boolean bl) {
-        // cache the fluid amount before removing the block so the item drops and then the fluid spawns
-        Optional<RainBarrelBlockEntity> blockEntity = level.getBlockEntity(blockPos, ModBlockEntities.RAIN_BARREL_ENTITY);
-        super.onRemove(blockState, level, blockPos, blockState2, bl);
-        blockEntity.ifPresent(RainBarrelBlockEntity::spawnWater);
+    public void destroy(LevelAccessor levelAccessor, BlockPos blockPos, BlockState blockState) {
+        if (Boolean.TRUE.equals(blockState.getValue(BlockStateProperties.WATERLOGGED))) {
+            Direction.Plane.HORIZONTAL.forEach(direction -> {
+                if (levelAccessor.getBlockState(blockPos.relative(direction)).canBeReplaced(Fluids.WATER)) {
+                    levelAccessor.setBlock(blockPos.relative(direction), Fluids.WATER.defaultFluidState().createLegacyBlock().setValue(BlockStateProperties.LEVEL, 7), 3);
+                }
+            });
+            levelAccessor.setBlock(blockPos, Fluids.WATER.defaultFluidState().createLegacyBlock().setValue(BlockStateProperties.LEVEL, 8), 3);
+        }
+        super.destroy(levelAccessor, blockPos, blockState);
     }
 
     @Nullable
