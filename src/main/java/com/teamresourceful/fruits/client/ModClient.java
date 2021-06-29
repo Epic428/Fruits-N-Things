@@ -1,5 +1,6 @@
 package com.teamresourceful.fruits.client;
 
+import com.teamresourceful.fruits.client.renderers.CrushingBarrelRenderer;
 import com.teamresourceful.fruits.client.renderers.RainBarrelRenderer;
 import com.teamresourceful.fruits.common.lib.Constants;
 import com.teamresourceful.fruits.common.registry.ModBlockEntities;
@@ -26,6 +27,7 @@ public class ModClient {
         BlockRenderLayerMap.INSTANCE.putBlock(ModBlocks.APPLE_BLOCK, RenderType.cutout());
 
         BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntities.RAIN_BARREL_ENTITY, RainBarrelRenderer::new);
+        BlockEntityRendererRegistry.INSTANCE.register(ModBlockEntities.CRUSHING_BARREL_ENTITY, CrushingBarrelRenderer::new);
         registerLeavesColor(ModBlocks.PALM_LEAVES);
     }
 

@@ -1,0 +1,13 @@
+{
+  "type": "fruits:crushing",
+  "presses": 3,
+  "ingredient": {
+    "id": "minecraft:apple",
+    "count": 2
+  },
+  "output": "minecraft:lava",
+  "chance": 1,
+  "weightedResult": {
+    "id": "minecraft:chest"
+  }
+}

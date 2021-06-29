@@ -1,5 +1,6 @@
 {
   "type": "fruits:crushing",
+  "presses": 5,
   "ingredient": {
     "id": "minecraft:stick",
     "count": 5

@@ -10,7 +10,7 @@ import com.teamresourceful.fruits.common.registry.ModRecipes;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -20,9 +20,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-public class CrushingRecipe implements Recipe<CraftingContainer> {
+public class CrushingRecipe implements Recipe<Container> {
 
     public static final Codec<CrushingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.INT.fieldOf("presses").forGetter(CrushingRecipe::getPresses),
             CodecUtils.INGREDIENT_CODEC.fieldOf("ingredient").forGetter(CrushingRecipe::getIngredient),
             Registry.FLUID.fieldOf("output").orElse(Fluids.EMPTY).forGetter(CrushingRecipe::getOutput),
             Codec.floatRange(0.0F, 1.0F).fieldOf("chance").orElse(0f).forGetter(CrushingRecipe::getChance),
@@ -30,21 +31,27 @@ public class CrushingRecipe implements Recipe<CraftingContainer> {
     ).apply(instance, CrushingRecipe::new));
 
     private final ResourceLocation id;
+    private final int presses;
     private final Ingredient ingredient;
     private final Fluid output;
     private final float chance;
     private final ItemStack weightedResult;
 
-    public CrushingRecipe(Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
-        this(null, ingredient, output, chance, weightedResult);
+    public CrushingRecipe(int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
+        this(null, presses, ingredient, output, chance, weightedResult);
     }
 
-    public CrushingRecipe(ResourceLocation id, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
+    public CrushingRecipe(ResourceLocation id, int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
         this.id = id;
+        this.presses = presses;
         this.ingredient = ingredient;
         this.output = output;
         this.chance = chance;
         this.weightedResult = weightedResult;
+    }
+
+    public int getPresses() {
+        return presses;
     }
 
     public Ingredient getIngredient() {
@@ -58,12 +65,12 @@ public class CrushingRecipe implements Recipe<CraftingContainer> {
     public ItemStack getWeightedResult() { return weightedResult; }
 
     @Override
-    public boolean matches(CraftingContainer container, Level level) {
+    public boolean matches(Container container, Level level) {
         return this.ingredient.test(container.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(CraftingContainer container) {
+    public ItemStack assemble(Container container) {
         return null;
     }
 
@@ -103,8 +110,7 @@ public class CrushingRecipe implements Recipe<CraftingContainer> {
         @Override
         public CrushingRecipe fromJson(ResourceLocation id, JsonObject json) {
             CrushingRecipe recipe = CrushingRecipe.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow(false, s -> Fruits.LOGGER.error("Could not parse Crushing Recipe!"));
-            System.out.println("A recipe loaded" + id);
-            return this.factory.create(id, recipe.ingredient, recipe.output, recipe.chance, recipe.weightedResult);
+            return this.factory.create(id, recipe.presses, recipe.ingredient, recipe.output, recipe.chance, recipe.weightedResult);
         }
 
         @Override
@@ -118,7 +124,7 @@ public class CrushingRecipe implements Recipe<CraftingContainer> {
         }
 
         public interface IRecipeFactory {
-            CrushingRecipe create(ResourceLocation id, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult);
+            CrushingRecipe create(ResourceLocation id, int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult);
         }
     }
 
