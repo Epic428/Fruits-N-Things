@@ -1,0 +1,42 @@
+{
+	"elements": [
+		{
+			"name": "branch",
+			"from": [7, 13, 4],
+			"to": [14, 17, 4],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [18, 24, 11]},
+			"faces": {
+				"north": {"uv": [0, 12, 7, 16], "texture": "#fruit"},
+				"south": {"uv": [7, 12, 0, 16], "texture": "#fruit"}
+			}
+		},
+		{
+			"name": "fruit",
+			"from": [9, 8, 4],
+			"to": [14, 13, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [19, 18, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 5], "texture": "#fruit"},
+				"east": {"uv": [10, 5, 15, 10], "texture": "#fruit"},
+				"south": {"uv": [10, 0, 15, 5], "texture": "#fruit"},
+				"west": {"uv": [5, 0, 10, 5], "texture": "#fruit"},
+				"up": {"uv": [0, 5, 5, 10], "texture": "#fruit"},
+				"down": {"uv": [5, 5, 10, 10], "texture": "#fruit"}
+			}
+		},
+		{
+			"name": "fruit",
+			"from": [3, 8, 6],
+			"to": [8, 13, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 18, 16]},
+			"faces": {
+				"north": {"uv": [0, 0, 5, 5], "texture": "#fruit"},
+				"east": {"uv": [10, 5, 15, 10], "texture": "#fruit"},
+				"south": {"uv": [10, 0, 15, 5], "texture": "#fruit"},
+				"west": {"uv": [5, 0, 10, 5], "texture": "#fruit"},
+				"up": {"uv": [0, 5, 5, 10], "texture": "#fruit"},
+				"down": {"uv": [5, 5, 10, 10], "texture": "#fruit"}
+			}
+		}
+	]
+}

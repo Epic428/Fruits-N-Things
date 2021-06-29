@@ -4,12 +4,10 @@ import com.teamresourceful.fruits.common.lib.Constants;
 import com.teamresourceful.fruits.common.registry.ModBlockEntities;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Fluids;
 
 public class RainBarrelBlockEntity extends BlockEntity implements BlockEntityClientSerializable {
     private int fluidAmount;
@@ -38,17 +36,6 @@ public class RainBarrelBlockEntity extends BlockEntity implements BlockEntityCli
         fluidAmount = Math.max(fluidAmount - amount, 0);
         if (fluidAmount == 0) {
             getBlockState().setValue(BlockStateProperties.WATERLOGGED, false);
-        }
-    }
-
-    public void spawnWater() {
-        if (fluidAmount >= 1000 && this.level != null) {
-            Direction.Plane.HORIZONTAL.forEach(direction -> {
-                if (this.level.getBlockState(this.getBlockPos().relative(direction)).canBeReplaced(Fluids.WATER)) {
-                    this.level.setBlockAndUpdate(this.getBlockPos().relative(direction), Fluids.WATER.defaultFluidState().createLegacyBlock().setValue(BlockStateProperties.LEVEL, 7));
-                }
-            });
-            this.level.setBlockAndUpdate(this.getBlockPos(), Fluids.WATER.defaultFluidState().createLegacyBlock().setValue(BlockStateProperties.LEVEL, 8));
         }
     }
 

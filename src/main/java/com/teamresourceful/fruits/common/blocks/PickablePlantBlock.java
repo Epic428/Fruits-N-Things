@@ -37,11 +37,17 @@ public class PickablePlantBlock extends BushBlock implements BonemealableBlock {
     public static final VoxelShape FULL_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 
     private final Supplier<Item> plant;
+    private int max;
 
     public PickablePlantBlock(Properties properties, Supplier<Item> plant) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
         this.plant = plant;
+    }
+
+    public PickablePlantBlock(Properties properties, Supplier<Item> plant, int max) {
+        this(properties, plant);
+        this.max = max;
     }
 
     @Override
@@ -72,7 +78,8 @@ public class PickablePlantBlock extends BushBlock implements BonemealableBlock {
         if (!maxAged && player.getItemInHand(hand).is(Items.BONE_MEAL)) return InteractionResult.PASS;
         if (state.getValue(AGE) < 2) return super.use(state,level,pos,player,hand,hitResult);
 
-        popResource(level, pos, new ItemStack(plant.get(), maxAged ? 2 + level.random.nextInt(2) : 1));
+        if (this.max == 0) popResource(level, pos, new ItemStack(plant.get(), maxAged ? 2 + level.random.nextInt(2) : 1));
+        else popResource(level, pos, new ItemStack(plant.get(), maxAged ? this.max : 1));
         level.setBlock(pos, state.setValue(AGE, 1), 2);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
@@ -98,5 +105,9 @@ public class PickablePlantBlock extends BushBlock implements BonemealableBlock {
             entity.makeStuckInBlock(blockState, new Vec3(0.8, 0.75, 0.8));
             if (!level.isClientSide && blockState.getValue(AGE) > 0) entity.hurt(DamageSource.SWEET_BERRY_BUSH, 0.5F);
         }
+    }
+
+    public BlockState getMaxAgeState() {
+        return this.defaultBlockState().setValue(AGE, MAX_AGE);
     }
 }

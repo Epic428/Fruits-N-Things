@@ -1,0 +1,6 @@
+{
+  "parent": "fruits:block/tree_fruit_1",
+  "textures": {
+    "fruit": "fruits:block/cherry_1"
+  }
+}
