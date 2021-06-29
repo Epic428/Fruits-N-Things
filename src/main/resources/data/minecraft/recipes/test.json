@@ -1,0 +1,12 @@
+{
+  "type": "fruits:crushing",
+  "ingredient": {
+    "id": "minecraft:stick",
+    "count": 5
+  },
+  "output": "minecraft:water",
+  "chance": 0.5,
+  "weightedResult": {
+    "id": "minecraft:acacia_button"
+  }
+}
