@@ -12,6 +12,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class ModBlocks {
     private ModBlocks() {
@@ -22,6 +24,7 @@ public class ModBlocks {
     private static final FabricBlockSettings METAL_PROPERTY = FabricBlockSettings.of(Material.METAL);
     private static final FabricBlockSettings CUTOUT_METAL_PROPERTY = FabricBlockSettings.copyOf(METAL_PROPERTY).nonOpaque();
     private static final FabricBlockSettings CUTOUT_WOOD_PROPERTY = FabricBlockSettings.copyOf(WOOD_PROPERTY).nonOpaque();
+    private static final FabricBlockSettings NON_PUSHABLE_STONE_PROPERTY = FabricBlockSettings.of(new Material(MaterialColor.STONE, false, true, true, true, false, false, PushReaction.BLOCK)); //using constructor bc builder is stupid
 
     public static final Block COMPOST_BIN = registerFlammableBlock("compost_bin", new CompostBinBlock(WOOD_PROPERTY), 5, 20);
     public static final Block FERTILIZED_DIRT = register("fertilized_dirt", new FertilizedDirtBlock(FabricBlockSettings.of(Material.DIRT)));
@@ -32,6 +35,7 @@ public class ModBlocks {
     public static final Block OIL_PRESS = register("oil_press", new OilPressBlock(CUTOUT_METAL_PROPERTY));
     public static final Block JUICER = register("juicer", new JuicerBlock(METAL_PROPERTY));
     public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
+    public static final Block CRUSHING_BARREL = register("crushing_barrel", new CrushingBarrelBlock(NON_PUSHABLE_STONE_PROPERTY)); //non pushable to be able to be automated with pistons
 
     public static final PickablePlantBlock BLACKBERRY_BUSH = registerBlockOnly("blackberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLACKBERRY));
     public static final PickablePlantBlock BLUEBERRY_BUSH = registerBlockOnly("blueberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLUEBERRY));
