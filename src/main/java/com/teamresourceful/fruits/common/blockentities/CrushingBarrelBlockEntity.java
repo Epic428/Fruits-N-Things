@@ -12,7 +12,11 @@ public class CrushingBarrelBlockEntity extends BlockEntity implements BlockEntit
     private int fluidAmount;
 
     public CrushingBarrelBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.RAIN_BARREL_ENTITY, blockPos, blockState);
+        super(ModBlockEntities.CRUSHING_BARREL_ENTITY, blockPos, blockState);
+    }
+
+    public void processRecipe() {
+        System.out.println("Test");
     }
 
     @Override
