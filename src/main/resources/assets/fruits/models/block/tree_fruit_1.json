@@ -1,0 +1,29 @@
+{
+	"credit": "Modeler: ThatGravyBoat",
+	"elements": [
+		{
+			"name": "branch",
+			"from": [7, 13, 4],
+			"to": [14, 17, 4],
+			"rotation": {"angle": 22.5, "axis": "y", "origin": [18, 24, 11]},
+			"faces": {
+				"north": {"uv": [0, 12, 7, 16], "texture": "#fruit"},
+				"south": {"uv": [7, 12, 0, 16], "texture": "#fruit"}
+			}
+		},
+		{
+			"name": "small_fruit",
+			"from": [10, 10, 5],
+			"to": [13, 13, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [18, 18, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 3, 3], "texture": "#fruit"},
+				"east": {"uv": [3, 0, 6, 3], "texture": "#fruit"},
+				"south": {"uv": [6, 0, 9, 3], "texture": "#fruit"},
+				"west": {"uv": [9, 0, 12, 3], "texture": "#fruit"},
+				"up": {"uv": [3, 3, 6, 6], "texture": "#fruit"},
+				"down": {"uv": [0, 3, 3, 6], "texture": "#fruit"}
+			}
+		}
+	]
+}

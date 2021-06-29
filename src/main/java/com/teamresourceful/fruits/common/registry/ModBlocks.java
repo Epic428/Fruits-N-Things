@@ -3,13 +3,17 @@ package com.teamresourceful.fruits.common.registry;
 import com.teamresourceful.fruits.Fruits;
 import com.teamresourceful.fruits.common.blocks.*;
 import com.teamresourceful.fruits.common.lib.Constants;
+import com.teamresourceful.fruits.common.world.generation.treegrowers.SaplingTreeGrower;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
@@ -37,9 +41,26 @@ public class ModBlocks {
     public static final Block BLENDER = register("blender", new BlenderBlock(METAL_PROPERTY));
     public static final Block CRUSHING_BARREL = register("crushing_barrel", new CrushingBarrelBlock(NON_PUSHABLE_STONE_PROPERTY)); //non pushable to be able to be automated with pistons
 
+    public static final Block PALM_LOG = registerFlammableBlock("palm_log", new RotatedPillarBlock(WOOD_PROPERTY), 5,5);
+    public static final Block PALM_LEAVES = registerFlammableBlock("palm_leaves", new AdvancedLeavesBlock(BlockBehaviour.Properties.of(Material.PLANT).noOcclusion()), 30,60);
+    public static final Block PALM_SAPLING = register("palm_sapling", new SaplingBlockBase(new SaplingTreeGrower(() -> ModFeatures.PALM_TREE)));
+
+    public static final Block CHERRY_LOG = registerFlammableBlock("cherry_log", new RotatedPillarBlock(WOOD_PROPERTY), 5,5);
+    public static final Block CHERRY_LEAVES = registerFlammableBlock("cherry_leaves", new AdvancedLeavesBlock(BlockBehaviour.Properties.of(Material.PLANT).noOcclusion()), 30,60);
+    public static final Block CHERRY_SAPLING = register("cherry_sapling", new SaplingBlockBase(new SaplingTreeGrower(() -> ModFeatures.CHERRY_TREE)));
+
+
+    public static final Block APPLE_SAPLING = register("apple_sapling", new SaplingBlockBase(new SaplingTreeGrower(() -> ModFeatures.APPLE_TREE)));
+
+
     public static final PickablePlantBlock BLACKBERRY_BUSH = registerBlockOnly("blackberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLACKBERRY));
     public static final PickablePlantBlock BLUEBERRY_BUSH = registerBlockOnly("blueberry_bush", new PickablePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.BLUEBERRY));
     public static final PickableCactusPlantBlock PRICKLY_PEAR_PLANT = registerBlockOnly("prickly_pear", new PickableCactusPlantBlock(BlockBehaviour.Properties.of(Material.PLANT), () -> ModItems.PRICKLY_PEAR));
+    public static final PickableTreePlantBlock COCONUT_BLOCK = registerBlockOnly("coconut", new PickableTreePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.COCONUT, () -> ModBlocks.PALM_LEAVES));
+    public static final PickableTreePlantBlock APPLE_BLOCK = registerBlockOnly("apple", new PickableTreePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), 1, () -> Items.APPLE, () -> Blocks.OAK_LEAVES));
+    public static final PickableTreePlantBlock CHERRY_BLOCK = registerBlockOnly("cherry", new PickableTreePlantBlock(BlockBehaviour.Properties.of(Material.PLANT).noCollission(), () -> ModItems.CHERRY, () -> ModBlocks.CHERRY_LEAVES));
+
+
 
 
     public static void onInitialize() {
