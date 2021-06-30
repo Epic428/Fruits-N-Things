@@ -40,7 +40,7 @@ public class CrushingBarrelBlockEntity extends BlockEntity implements Container 
     public float progress() {
         if (!fluid.isSame(Fluids.EMPTY)) return 1f;
         if (recipe == null) return 0f;
-        return (float)this.presses / (float)recipe.getPresses();
+        return (float)this.presses / (float)recipe.presses();
     }
 
     public CrushingRecipe getCurrentRecipe() {
@@ -50,9 +50,9 @@ public class CrushingBarrelBlockEntity extends BlockEntity implements Container 
     public void processRecipe() {
         if (this.level == null) return;
         items.clear();
-        if (this.level.random.nextFloat() < recipe.getChance())
-            items.set(1, recipe.getWeightedResult().copy());
-        fluid = recipe.getOutput();
+        if (this.level.random.nextFloat() < recipe.chance())
+            items.set(1, recipe.weightedResult().copy());
+        fluid = recipe.output();
         recipe = null;
     }
 
@@ -63,12 +63,12 @@ public class CrushingBarrelBlockEntity extends BlockEntity implements Container 
             presses = 0;
             return;
         }
-        if (recipe.getIngredient().getItems()[0].getCount() != getItem(0).getCount()) {
+        if (recipe.ingredient().getItems()[0].getCount() != getItem(0).getCount()) {
             presses = 0;
             return;
         }
         presses++;
-        if (presses >= recipe.getPresses()){
+        if (presses >= recipe.presses()){
             processRecipe();
             presses = 0;
         }

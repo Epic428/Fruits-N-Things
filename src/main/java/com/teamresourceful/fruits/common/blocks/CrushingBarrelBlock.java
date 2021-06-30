@@ -90,7 +90,7 @@ public class CrushingBarrelBlock extends Block implements EntityBlock {
         CrushingRecipe recipe = level.getRecipeManager().getRecipeFor(ModRecipes.CRUSHING_RECIPE_TYPE, new SimpleContainer(stack), level).orElse(null);
         if (recipe == null) return InteractionResult.PASS;
         if (level.getBlockEntity(pos) instanceof CrushingBarrelBlockEntity blockEntity){
-            if (blockEntity.getItem(0).getCount() >= recipe.getIngredient().getItems()[0].getCount()) return InteractionResult.PASS;
+            if (blockEntity.getItem(0).getCount() >= recipe.ingredient().getItems()[0].getCount()) return InteractionResult.PASS;
 
             ItemStack copy = stack.copy();
             copy.setCount(1);

@@ -20,49 +20,19 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 
-public class CrushingRecipe implements Recipe<Container> {
+public record CrushingRecipe(ResourceLocation id, int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) implements Recipe<Container> {
 
     public static final Codec<CrushingRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.INT.fieldOf("presses").forGetter(CrushingRecipe::getPresses),
-            CodecUtils.INGREDIENT_CODEC.fieldOf("ingredient").forGetter(CrushingRecipe::getIngredient),
-            Registry.FLUID.fieldOf("output").orElse(Fluids.EMPTY).forGetter(CrushingRecipe::getOutput),
-            Codec.floatRange(0.0F, 1.0F).fieldOf("chance").orElse(0f).forGetter(CrushingRecipe::getChance),
-            CodecUtils.ITEM_STACK_CODEC.fieldOf("weightedResult").orElse(ItemStack.EMPTY).forGetter(CrushingRecipe::getWeightedResult)
-    ).apply(instance, CrushingRecipe::new));
+            Codec.INT.fieldOf("presses").forGetter(CrushingRecipe::presses),
+            CodecUtils.INGREDIENT_CODEC.fieldOf("ingredient").forGetter(CrushingRecipe::ingredient),
+            Registry.FLUID.fieldOf("output").orElse(Fluids.EMPTY).forGetter(CrushingRecipe::output),
+            Codec.floatRange(0.0F, 1.0F).fieldOf("chance").orElse(0f).forGetter(CrushingRecipe::chance),
+            CodecUtils.ITEM_STACK_CODEC.fieldOf("weightedResult").orElse(ItemStack.EMPTY).forGetter(CrushingRecipe::weightedResult)
+    ).apply(instance, CrushingRecipe::create));
 
-    private final ResourceLocation id;
-    private final int presses;
-    private final Ingredient ingredient;
-    private final Fluid output;
-    private final float chance;
-    private final ItemStack weightedResult;
-
-    public CrushingRecipe(int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
-        this(null, presses, ingredient, output, chance, weightedResult);
+    private static CrushingRecipe create(int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult){
+        return new CrushingRecipe(null, presses,ingredient,output,chance,weightedResult);
     }
-
-    public CrushingRecipe(ResourceLocation id, int presses, Ingredient ingredient, Fluid output, float chance, ItemStack weightedResult) {
-        this.id = id;
-        this.presses = presses;
-        this.ingredient = ingredient;
-        this.output = output;
-        this.chance = chance;
-        this.weightedResult = weightedResult;
-    }
-
-    public int getPresses() {
-        return presses;
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public float getChance() { return chance; }
-
-    public Fluid getOutput() { return output; }
-
-    public ItemStack getWeightedResult() { return weightedResult; }
 
     @Override
     public boolean matches(Container container, Level level) {
